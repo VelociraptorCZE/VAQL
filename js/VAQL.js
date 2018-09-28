@@ -14,7 +14,7 @@ export const VAQL = {
         }
       }
       let err = (mode) =>{
-        throw "Following mode: " + mode + " is a invalid mode!";
+        throw "Following mode: " + mode + " is an invalid mode!";
       }
       let res = null;
       let i = 0;
