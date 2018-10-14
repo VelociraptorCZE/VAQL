@@ -31,7 +31,7 @@ Array.prototype.findInArray = function(val, mode = 1) {
                 }
             }
             else{
-                (mode < 1 || mode > 3 || !parseInt(mode)) ? err(mode) : null;
+                (mode < 1 || mode > 3) ? err(mode) : null;
             }
         }
         i++;
