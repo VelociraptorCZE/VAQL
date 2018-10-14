@@ -62,5 +62,5 @@ Array.prototype.average = function(decimalPlaces) {
         num += item;
     });
     res = num / this.length;
-    return decimalPlaces !== void 0 ? (res).toFixed(decimalPlaces) : res;
+    return decimalPlaces !== void 0 ? parseFloat((res).toFixed(decimalPlaces)) : res;
 };
