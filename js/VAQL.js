@@ -4,75 +4,63 @@ Copyright (C) Simon Raichl 2018
 MIT License
 Use this as you want, share it as you want, do basically whatever you want with this :)
 */
-export const VAQL = {
-  find: {
-    it: (val, array, mode = 1) => {
-      let assign = (condition = (!isAssigned)) => {
-        if (condition){
-          res = i;
-          isAssigned = true;
-        }
-      }
-      let err = (mode) =>{
-        throw "Following mode: " + mode + " is an invalid mode!";
-      }
-      let res = null;
-      let i = 0;
-      let isAssigned = false;
-      array.forEach((item) => {
+
+Array.prototype.findInArray = function(val, mode = 1) {
+    let res = null;
+    let i = 0;
+    let isAssigned = false;
+    let assign = (condition = (!isAssigned)) => {
+        condition ? (() => { res = i; isAssigned = true; })() : null;
+    };
+    let err = (mode) =>{
+        throw "following mode: " + mode + " is a invalid mode!";
+    };
+    this.forEach((item) => {
         if (item === val){
-          assign(mode === 2 || (mode === 1 && !isAssigned));
-          if (mode === 3){
-            assign();
-            let temp = res;
-            if (typeof res !== "object"){
-              res = [];
-              res.push(temp);
+            assign((mode === 2 || mode === "last") || (mode === 1 && !isAssigned));
+            if (mode === 3 || mode === "all"){
+                assign();
+                let temp = res;
+                if (typeof res !== "object"){
+                    res = [];
+                    res.push(temp);
+                }
+                else{
+                    res = temp;
+                    res.push(i);
+                }
             }
             else{
-              res = temp;
-              res.push(i);
+                (mode < 1 || mode > 3 || !parseInt(mode)) ? err(mode) : null;
             }
-          }
-          else{
-            (mode < 1 || mode > 3 || !parseInt(mode)) ? err(mode) : null;
-          }
         }
         i++;
-      });
-      return res;
-    },
-    first: (val, array) => {
-      return VAQL.find.it(val, array, 1);
-    },
-    last: (val, array) => {
-      return VAQL.find.it(val, array, 2);
-    },
-    all: (val, array) => {
-      return VAQL.find.it(val, array, 3);
-    }
-  },
-  sort: (array, direction) => {
-    let buffer;
-    for (let i = 0; i < array.length; i++) {
-      for (let j = 0; j < array.length; j++) {
-        if (direction === "reverse" ? array[i] > array[j] : array[i] < array[j]){
-          buffer = array[j];
-          array[j] = array[i];
-          array[i] = buffer;
-        }
-      }
-    }
-    return array;
-  },
-  average: (array) => {
-    let num = null;
-    array.forEach((item) => {
-      if (num === null){
-        num = 0;
-      }
-      num += item;
     });
-    return (num / array.length).toFixed(2);
-  }
-}
+    return res;
+};
+
+Array.prototype.sortArray = function(direction) {
+    let buffer;
+    for (let i = 0; i < this.length; i++) {
+        for (let j = 0; j < this.length; j++) {
+            if (direction === "reverse" ? this[i] > this[j] : this[i] < this[j]){
+                buffer = this[j];
+                this[j] = this[i];
+                this[i] = buffer;
+            }
+        }
+    }
+    return this;
+};
+
+Array.prototype.average = function(decimalPlaces) {
+    let num = null, res;
+    this.forEach((item) => {
+        if (num === null){
+            num = 0;
+        }
+        num += item;
+    });
+    res = num / this.length;
+    return decimalPlaces !== void 0 ? (res).toFixed(decimalPlaces) : res;
+};

@@ -18,31 +18,31 @@
 
 </textarea>
 
-    <script type = "module">
-
-    import {VAQL} from "./js/VAQL.js";
+    <script src="js/VAQL.js"></script>
+    <script>
 
     let write = (param) => {
       console.log(param);
       document.getElementById("out").innerHTML += param + "\n";
-    }
+    };
 
-    var array = ["Foo", "Bar", "Baz", "Baz", "Qux", "Quux", "Quuz", "Baz"];
-    var numArray = [5, 89, 2, 42, 3, 475, 1, 13, 26, 69, 25, 24, 26];
+    let array = ["Foo", "Bar", "Baz", "Baz", "Qux", "Quux", "Quuz", "Baz"];
+    let numArray = [5, 89, 2, 42, 3, 475, 1, 13, 26, 69, 25, 24, 26];
 
-    write(array);
-    write(array[VAQL.find.first("Foo", array)] = "Some other value");
-    write(array);
-    write(VAQL.find.first("Baz", array));
-    write(VAQL.find.all("Baz", array));
-    write(VAQL.find.last("Bar", array));
-    write(VAQL.find.last("Baz", array));
-    write(VAQL.find.first("Foo", array));
+    write("Array: " + array);
+    write(array[array.findInArray("Foo")] = "Some other value");
+    write("Array after change of Foo with Some other value: " + array);
+    write("Find first index in an array with string Baz: " + array.findInArray("Baz"));
+    write("Find all indexes in an array with string Baz: " + array.findInArray("Baz", 3 || "all"));
+    write("Find last index in an array with string Bar: " + array.findInArray("Bar", 2 || "last"));
+    write("Find last index in an array with string Baz: " + array.findInArray("Baz", 2 || "last"));
+    write("Find last index in an array with string Foo: " + array.findInArray("Foo"));
     write("An unsorted array: " + numArray);
-    write("A sorted array: " + VAQL.sort(numArray));
-    write("Average: " + VAQL.average(numArray));
+    write("A sorted array: " + numArray.sortArray());
+    write("A reverse sorted array: " + numArray.sortArray("reverse"));
+    write("An average: " + numArray.average());
+    write("An average rounded to two decimal places: " + numArray.average(2));
 
     </script>
-
   </body>
 </html>
