@@ -28,6 +28,8 @@
 
     let array = ["Foo", "Bar", "Baz", "Baz", "Qux", "Quux", "Quuz", "Baz"];
     let numArray = [5, 89, 2, 42, 3, 475, 1, 13, 26, 69, 25, 24, 26];
+    let testArray1 = [5, 2, 4, 1];
+    let testArray2 = [2, 5, 4, 1];
 
     write("Array: " + array);
     write(array[array.findInArray("Foo")] = "Some other value");
@@ -42,6 +44,8 @@
     write("A reverse sorted array: " + numArray.sortArray("reverse"));
     write("An average: " + numArray.average());
     write("An average rounded to two decimal places: " + numArray.average(2));
+    write("Compare these two arrays: " + testArray1 + " and " + testArray2 + ": " + testArray1.compareArrays(testArray2));
+    write("Compare these two arrays: " + testArray1 + " and " + testArray1 + ": " + testArray1.compareArrays(testArray1));
 
     </script>
   </body>

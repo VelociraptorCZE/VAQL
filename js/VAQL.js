@@ -56,11 +56,22 @@ Array.prototype.sortArray = function(direction) {
 Array.prototype.average = function(decimalPlaces) {
     let num = null, res;
     this.forEach((item) => {
-        if (num === null){
-            num = 0;
-        }
+        num === null ? num = 0 : null;
         num += item;
     });
     res = num / this.length;
     return decimalPlaces !== void 0 ? parseFloat((res).toFixed(decimalPlaces)) : res;
+};
+
+Array.prototype.compareArrays = function(array) {
+  let res = true;
+  this.length === array.length ? (() => {
+      for (let i = 0; i < this.length; i++){
+          if (this[i] != array[i]){
+              res = false;
+              break;
+          }
+      }
+  })() : res = false;
+  return res;
 };
