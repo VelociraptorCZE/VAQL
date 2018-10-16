@@ -1,5 +1,5 @@
 # VAQL
-This library has only three functions at this point - you can find occurrences in arrays filtered by your value, sort arrays and make an average.
+This library has four functions at this point - you can find occurrences in arrays filtered by your value, sort arrays, make an average and finally compare arrays.
 ### Array.prototype.findInArray(value, mode)
 This function finds an index or array of indexes in an array, it compares first parameter with every index in the array and its value. Returns first, last or all occurrences.
 ```js
@@ -23,4 +23,11 @@ This function makes an average from an array, you can also specify number of dec
 let array = [8, 41, 20, 12, 98, 78, 33, 13];
 array.average(); // returns 37.875
 array.average(2); // returns 37.88
+```
+
+### Array.prototype.compareArrays(array)
+This function simply compares two arrays.
+```js
+[2, 5, 6].compareArrays([2, 5, 6]); // returns true 
+[2, 5, 6].compareArrays([9, 5, 6]); // returns false
 ```
